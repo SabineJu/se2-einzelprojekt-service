@@ -89,4 +89,21 @@ class GameResultServiceTests {
         assertNull(res)
     }
 
+    @Test
+    fun test_deleteGameResult_nonExistingId_doesNothing() {
+
+        val gameResult = GameResult(0, "player1", 17, 15.3)
+
+        service.addGameResult(gameResult)
+
+        // versuchen etwas zu löschen das nicht existiert
+        service.deleteGameResult(99)
+
+        val res = service.getGameResults()
+
+        // Liste sollte unverändert bleiben
+        assertEquals(1, res.size)
+        assertEquals(gameResult, res[0])
+    }
+
 }
