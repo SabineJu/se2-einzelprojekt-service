@@ -72,4 +72,21 @@ class GameResultServiceTests {
         assertEquals(2, res[1].id)
     }
 
+    @Test
+    fun test_deleteGameResult_existingId_removesElement() {
+
+        val gameResult = GameResult(0, "player1", 17, 15.3)
+
+        service.addGameResult(gameResult)
+
+        // löschen
+        service.deleteGameResult(1)
+
+        // versuchen wieder zu holen
+        val res = service.getGameResult(1)
+
+        // sollte nicht mehr existieren
+        assertNull(res)
+    }
+
 }
